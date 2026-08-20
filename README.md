@@ -2,7 +2,7 @@
 
 在 Obsidian 中写 Markdown，在右侧直接查看公众号排版，并复制富文本到微信公众号编辑器。Obsidian 笔记是唯一文稿源，插件不会再提供一套重复的 Markdown 编辑器。
 
-> 当前为公开测试版，尚未提交到 Obsidian 官方社区插件市场。
+> 当前为公开测试版，正在申请加入 Obsidian 官方社区插件市场。
 
 ## 界面预览
 
@@ -60,6 +60,7 @@ npm run install:vault -- /path/to/your/vault
 为了生成预览，插件会把当前 Markdown 笔记内容通过受来源限制的 `postMessage` 发送给设置中配置的 Bloomtype 页面。默认页面为 `https://mp.autoaihub.cn`。
 
 - 插件不会读取当前 Markdown 笔记之外的文件。
+- Obsidian 嵌入模式不会加载网站统计或客户端遥测脚本。
 - 远程服务地址必须使用 HTTPS；本机调试允许 localhost HTTP。
 - 超过 5 MB 的笔记不会自动同步。
 - 请只配置你信任的服务地址；敏感内容建议使用可信的本地服务。

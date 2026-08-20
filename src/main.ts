@@ -240,7 +240,6 @@ class BloomtypeSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this
     containerEl.empty()
-    containerEl.createEl("h2", { text: "Bloomtype 排版" })
     containerEl.createEl("p", {
       cls: "setting-item-description bloomtype-settings-intro",
       text: "插件会把当前 Markdown 笔记注入 Bloomtype 页面，不调用额外上传接口。远程地址必须使用 HTTPS。",
