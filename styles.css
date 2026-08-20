@@ -1,0 +1,71 @@
+.workspace-leaf-content[data-type="bloomtype-publisher-view"] .view-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.bloomtype-view {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  flex-direction: column;
+  background: var(--background-primary);
+}
+
+.bloomtype-connection-status {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 24px);
+  min-height: 30px;
+  padding: 6px 10px;
+  transform: translateX(-50%);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  background: var(--background-primary);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-s);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.bloomtype-connection-status[data-visible="false"] {
+  display: none;
+}
+
+.bloomtype-connection-status[data-state="error"] {
+  color: var(--text-error);
+}
+
+.bloomtype-frame {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  border: 0;
+  background: #f3f2ef;
+}
+
+.bloomtype-error {
+  margin: auto;
+  max-width: 320px;
+  padding: 24px;
+  text-align: center;
+}
+
+.bloomtype-error strong {
+  color: var(--text-normal);
+}
+
+.bloomtype-error p,
+.bloomtype-settings-intro {
+  color: var(--text-muted);
+}

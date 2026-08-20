@@ -1,0 +1,37 @@
+{
+  "name": "obsidian-bloomtype",
+  "version": "0.1.0",
+  "description": "在 Obsidian 侧栏中实时预览并复制公众号排版",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "install:vault": "node scripts/install.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "obsidian",
+    "markdown",
+    "wechat",
+    "publishing"
+  ],
+  "author": "花海",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0FlowerOcean0/bloomtype-obsidian.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0FlowerOcean0/bloomtype-obsidian/issues"
+  },
+  "homepage": "https://github.com/0FlowerOcean0/bloomtype-obsidian#readme",
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "esbuild": "0.25.5",
+    "obsidian": "latest",
+    "typescript": "^5.8.3"
+  }
+}

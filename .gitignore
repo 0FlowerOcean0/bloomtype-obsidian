@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+*.map
+.env
+.env.*
+data.json
+
+# Local Obsidian development vaults
+.obsidian/
+vault/
+
+# The release workflow rebuilds this file from src/.
+main.js
