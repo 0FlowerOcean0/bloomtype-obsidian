@@ -4,6 +4,16 @@
 
 > 当前为公开测试版，尚未提交到 Obsidian 官方社区插件市场。
 
+## 界面预览
+
+![在 Obsidian 左侧编辑 Markdown，右侧实时查看 Bloomtype 公众号排版](images/obsidian-split-preview.jpeg)
+
+在 Obsidian 原笔记中写作，右侧同步显示公众号排版；默认使用电脑预览，也可以切换手机宽度后检查阅读效果。
+
+![在 Obsidian 侧栏中展开 Bloomtype 样式面板](images/obsidian-style-panel.jpeg)
+
+样式面板针对窄侧栏重新排布，可直接选择主题、配色和章节样式，不需要离开 Obsidian。
+
 ## 功能
 
 - 从左侧功能区一键打开 Bloomtype 侧栏。
