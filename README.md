@@ -1,4 +1,4 @@
-# Bloomtype Obsidian 插件
+# Bloomtype Publisher
 
 在 Obsidian 中写 Markdown，在右侧直接查看公众号排版，并复制富文本到微信公众号编辑器。Obsidian 笔记是唯一文稿源，插件不会再提供一套重复的 Markdown 编辑器。
 

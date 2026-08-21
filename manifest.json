@@ -1,9 +1,9 @@
 {
   "id": "bloomtype-publisher",
-  "name": "Bloomtype 排版",
-  "version": "0.1.1",
+  "name": "Bloomtype Publisher",
+  "version": "0.1.2",
   "minAppVersion": "1.5.0",
-  "description": "在 Obsidian 中打开 Bloomtype，并将当前 Markdown 笔记实时同步到排版工作台。",
+  "description": "Preview Markdown notes in Bloomtype and copy styled content to WeChat.",
   "author": "花海",
   "authorUrl": "https://mp.autoaihub.cn",
   "isDesktopOnly": true
