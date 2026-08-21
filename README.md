@@ -1,8 +1,12 @@
 # Bloomtype Publisher
 
+[![Obsidian Community Plugin](https://img.shields.io/badge/Obsidian-Community%20Plugin-7C3AED?logo=obsidian&logoColor=white)](https://community.obsidian.md/plugins/bloomtype-publisher)
+[![Latest release](https://img.shields.io/github/v/release/0FlowerOcean0/bloomtype-obsidian?label=release)](https://github.com/0FlowerOcean0/bloomtype-obsidian/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 在 Obsidian 中写 Markdown，在右侧直接查看公众号排版，并复制富文本到微信公众号编辑器。Obsidian 笔记是唯一文稿源，插件不会再提供一套重复的 Markdown 编辑器。
 
-> 当前为公开测试版，正在申请加入 Obsidian 官方社区插件市场。
+> 已正式上架 Obsidian 官方社区插件市场：[查看插件页面并安装](https://community.obsidian.md/plugins/bloomtype-publisher)。
 
 ## English overview
 
@@ -16,10 +20,10 @@ WeChat layout, and copies compatible rich text to the WeChat editor.
 - Copy the rendered rich text directly to the WeChat editor.
 - Configure a trusted HTTPS service URL; localhost HTTP is allowed for development.
 
-To install manually, download `main.js`, `manifest.json`, and `styles.css` from the latest
-GitHub Release and place them in `.obsidian/plugins/bloomtype-publisher/`. The embedded
-Obsidian mode does not load website analytics or client telemetry. See
-[PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md) for details.
+Bloomtype Publisher is available from the official Obsidian Community Plugins directory.
+Open **Settings → Community plugins → Browse**, search for **Bloomtype Publisher**, then
+select **Install** and **Enable**. The embedded Obsidian mode does not load website analytics
+or client telemetry. See [PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md) for details.
 
 ## 界面预览
 
@@ -44,16 +48,22 @@ Obsidian mode does not load website analytics or client telemetry. See
 
 ## 安装
 
+### 从 Obsidian 社区插件市场安装（推荐）
+
+1. 打开 Obsidian“设置 → 第三方插件”。
+2. 点击“浏览”，搜索 `Bloomtype Publisher`。
+3. 点击“安装”，完成后点击“启用”。
+
+[前往 Obsidian 官方插件页面](https://community.obsidian.md/plugins/bloomtype-publisher)
+
+> 最低支持 Obsidian 1.13.0，仅支持桌面端。
+
 ### 从 GitHub Release 手动安装
 
-1. 从最新 Release 下载 `main.js`、`manifest.json` 和 `styles.css`。
+1. 从[最新 Release](https://github.com/0FlowerOcean0/bloomtype-obsidian/releases/latest) 下载 `main.js`、`manifest.json` 和 `styles.css`。
 2. 在 Vault 中创建 `.obsidian/plugins/bloomtype-publisher/`。
 3. 把三个文件放入该目录。
-4. 打开“设置 → 第三方插件”，启用“Bloomtype 排版”。
-
-### 使用 BRAT
-
-将本仓库地址添加到 BRAT，即可作为公开测试版安装和更新。
+4. 打开“设置 → 第三方插件”，启用“Bloomtype Publisher”。
 
 ### 从源码安装
 
