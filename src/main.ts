@@ -3,7 +3,7 @@ import {
   Notice,
   Plugin,
   PluginSettingTab,
-  Setting,
+  SettingDefinitionItem,
   TFile,
   WorkspaceLeaf,
 } from "obsidian"
@@ -40,6 +40,8 @@ const DEFAULT_SETTINGS: BloomtypeSettings = {
   autoSync: true,
 }
 
+type BloomtypeSettingKey = keyof BloomtypeSettings
+
 function isBridgeReadyMessage(value: unknown): value is BridgeReadyMessage {
   if (!value || typeof value !== "object") return false
   const message = value as Record<string, unknown>
@@ -67,6 +69,28 @@ function toServiceUrl(raw: string, embedded: boolean): URL {
   }
   if (embedded) url.searchParams.set("obsidian", "1")
   return url
+}
+
+function validateServiceUrl(raw: string): string | void {
+  try {
+    toServiceUrl(raw, false)
+  } catch (error) {
+    return error instanceof Error ? error.message : "服务地址无效"
+  }
+}
+
+function parseSettings(value: unknown): BloomtypeSettings {
+  if (!value || typeof value !== "object") return { ...DEFAULT_SETTINGS }
+
+  const stored = value as Record<string, unknown>
+  return {
+    serviceUrl:
+      typeof stored.serviceUrl === "string"
+        ? stored.serviceUrl.trim()
+        : DEFAULT_SETTINGS.serviceUrl,
+    autoSync:
+      typeof stored.autoSync === "boolean" ? stored.autoSync : DEFAULT_SETTINGS.autoSync,
+  }
 }
 
 class BloomtypeView extends ItemView {
@@ -237,46 +261,59 @@ class BloomtypeSettingTab extends PluginSettingTab {
     super(plugin.app, plugin)
   }
 
-  display(): void {
-    const { containerEl } = this
-    containerEl.empty()
-    containerEl.createEl("p", {
-      cls: "setting-item-description bloomtype-settings-intro",
-      text: "插件会把当前 Markdown 笔记注入 Bloomtype 页面，不调用额外上传接口。远程地址必须使用 HTTPS。",
-    })
-
-    new Setting(containerEl)
-      .setName("Bloomtype 服务地址")
-      .setDesc("默认使用 mp.autoaihub.cn；本机开发可填 http://localhost:3000。")
-      .addText((text) =>
-        text
-          .setPlaceholder(DEFAULT_SERVICE_URL)
-          .setValue(this.plugin.settings.serviceUrl)
-          .onChange(async (value) => {
-            this.plugin.settings.serviceUrl = value.trim()
-            await this.plugin.saveSettings()
-          }),
-      )
-
-    new Setting(containerEl)
-      .setName("自动同步当前笔记")
-      .setDesc("切换笔记或编辑当前笔记后，自动刷新 Bloomtype 中的文稿。")
-      .addToggle((toggle) =>
-        toggle.setValue(this.plugin.settings.autoSync).onChange(async (value) => {
-          this.plugin.settings.autoSync = value
-          await this.plugin.saveSettings()
-        }),
-      )
-
-    new Setting(containerEl)
-      .setName("应用设置")
-      .setDesc("重新载入已经打开的 Bloomtype 侧栏。")
-      .addButton((button) =>
-        button.setButtonText("重新载入").onClick(() => {
+  getSettingDefinitions(): SettingDefinitionItem<BloomtypeSettingKey>[] {
+    return [
+      {
+        name: "数据与隐私",
+        desc: "插件会把当前 Markdown 笔记注入 Bloomtype 页面，不调用额外上传接口。远程地址必须使用 HTTPS。",
+      },
+      {
+        name: "Bloomtype 服务地址",
+        desc: "默认使用 mp.autoaihub.cn；本机开发可填 http://localhost:3000。",
+        control: {
+          type: "text",
+          key: "serviceUrl",
+          defaultValue: DEFAULT_SERVICE_URL,
+          placeholder: DEFAULT_SERVICE_URL,
+          validate: validateServiceUrl,
+        },
+      },
+      {
+        name: "自动同步当前笔记",
+        desc: "切换笔记或编辑当前笔记后，自动刷新 Bloomtype 中的文稿。",
+        control: {
+          type: "toggle",
+          key: "autoSync",
+          defaultValue: DEFAULT_SETTINGS.autoSync,
+        },
+      },
+      {
+        name: "应用设置",
+        desc: "重新载入已经打开的 Bloomtype 侧栏。",
+        action: () => {
           this.plugin.reloadOpenViews()
           new Notice("Bloomtype 已重新载入")
-        }),
-      )
+        },
+      },
+    ]
+  }
+
+  getControlValue(key: string): unknown {
+    if (key === "serviceUrl") return this.plugin.settings.serviceUrl
+    if (key === "autoSync") return this.plugin.settings.autoSync
+    return undefined
+  }
+
+  async setControlValue(key: string, value: unknown): Promise<void> {
+    if (key === "serviceUrl" && typeof value === "string") {
+      this.plugin.settings.serviceUrl = value.trim()
+    } else if (key === "autoSync" && typeof value === "boolean") {
+      this.plugin.settings.autoSync = value
+    } else {
+      return
+    }
+
+    await this.plugin.saveSettings()
   }
 }
 
@@ -371,8 +408,10 @@ export default class BloomtypePlugin extends Plugin {
   }
 
   onunload(): void {
-    if (this.syncTimer !== null) window.clearTimeout(this.syncTimer)
-    this.app.workspace.detachLeavesOfType(VIEW_TYPE_BLOOMTYPE)
+    if (this.syncTimer !== null) {
+      window.clearTimeout(this.syncTimer)
+      this.syncTimer = null
+    }
   }
 
   getCurrentMarkdownFile(): TFile | null {
@@ -390,7 +429,8 @@ export default class BloomtypePlugin extends Plugin {
   }
 
   private async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
+    const stored: unknown = await this.loadData()
+    this.settings = parseSettings(stored)
   }
 
   private async activateView(): Promise<void> {

@@ -4,6 +4,23 @@
 
 > 当前为公开测试版，正在申请加入 Obsidian 官方社区插件市场。
 
+## English overview
+
+Bloomtype Publisher keeps Markdown as the single source of truth in Obsidian. It opens
+Bloomtype in a right-side view, synchronizes the active Markdown note, previews the final
+WeChat layout, and copies compatible rich text to the WeChat editor.
+
+- Open the Bloomtype workspace from the ribbon or command palette.
+- Synchronize only the active Markdown note through a restricted `postMessage` bridge.
+- Switch themes, colors, and desktop or mobile preview modes inside the side view.
+- Copy the rendered rich text directly to the WeChat editor.
+- Configure a trusted HTTPS service URL; localhost HTTP is allowed for development.
+
+To install manually, download `main.js`, `manifest.json`, and `styles.css` from the latest
+GitHub Release and place them in `.obsidian/plugins/bloomtype-publisher/`. The embedded
+Obsidian mode does not load website analytics or client telemetry. See
+[PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md) for details.
+
 ## 界面预览
 
 ![在 Obsidian 左侧编辑 Markdown，右侧实时查看 Bloomtype 公众号排版](obsidian-split-preview.jpeg)

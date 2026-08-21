@@ -1,12 +1,13 @@
 {
   "name": "obsidian-bloomtype",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "在 Obsidian 侧栏中实时预览并复制公众号排版",
   "main": "main.js",
   "type": "module",
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "lint": "eslint src",
     "install:vault": "node scripts/install.mjs"
   },
   "engines": {
@@ -30,7 +31,10 @@
   "homepage": "https://github.com/0FlowerOcean0/bloomtype-obsidian#readme",
   "devDependencies": {
     "@types/node": "^22.15.17",
+    "@typescript-eslint/parser": "^8.67.0",
     "esbuild": "0.25.5",
+    "eslint": "^9.39.5",
+    "eslint-plugin-obsidianmd": "^0.4.1",
     "obsidian": "latest",
     "typescript": "^5.8.3"
   }
